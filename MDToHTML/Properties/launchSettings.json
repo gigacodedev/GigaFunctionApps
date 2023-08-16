@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "MDToHTML": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7100",
+      "launchBrowser": false
+    }
+  }
+}
