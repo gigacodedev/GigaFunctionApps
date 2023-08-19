@@ -34,17 +34,14 @@ public static class MDToHTML
         var outputBytes = await page.PdfDataAsync();
         await browser.CloseAsync();
 
-        if (html.Base64)
+        if (!html.Base64) return new FileStreamResult(outputStream, "application/pdf");
+        var outboundObject = new Outbound
         {
-            var outboundObject = new Outbound
-            {
-                base64Pdf = Convert.ToBase64String(outputBytes)
-            };
-            var serializedJson = JsonConvert.SerializeObject(outboundObject);
-            return new OkObjectResult(serializedJson);
-        }
+            base64Pdf = Convert.ToBase64String(outputBytes)
+        };
+        var serializedJson = JsonConvert.SerializeObject(outboundObject);
+        return new OkObjectResult(serializedJson);
 
-        return new FileStreamResult(outputStream, "application/pdf");
     }
 }
 
